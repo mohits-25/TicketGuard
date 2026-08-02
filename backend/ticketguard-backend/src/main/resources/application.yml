@@ -1,0 +1,74 @@
+# ==========================================================
+# TicketGuard Backend - Sample Configuration
+# Rename this file to application.yml and update the values.
+# ==========================================================
+
+server:
+  port: 8080
+
+spring:
+
+  application:
+    name: ticketguard-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ticketguard
+    username: your_postgres_username
+    password: your_postgres_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# ==========================================================
+# JWT Configuration
+# ==========================================================
+
+jwt:
+  secret: YOUR_256_BIT_SECRET_KEY_HERE_CHANGE_ME
+  expiration: 86400000
+
+# ==========================================================
+# Swagger / OpenAPI
+# ==========================================================
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+# ==========================================================
+# Logging
+# ==========================================================
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: INFO
+    com.ticketguard.ticketguard_backend: INFO
+
+# ==========================================================
+# File Storage
+# ==========================================================
+
+ticket:
+  upload:
+    qr-directory: uploads/qr
+    pdf-directory: uploads/pdf
