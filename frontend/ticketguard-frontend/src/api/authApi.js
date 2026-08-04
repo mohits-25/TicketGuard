@@ -1,3 +1,21 @@
-const authApi = () => <div>authApi</div>;
+import api from "./axios";
 
-export default authApi;
+export const login = async (credentials) => {
+
+    const response = await api.post(
+        "/api/auth/login",
+        credentials
+    );
+
+    return response.data;
+};
+
+export const register = async (userData) => {
+
+    const response = await api.post(
+        "/api/auth/register",
+        userData
+    );
+
+    return response.data;
+};
