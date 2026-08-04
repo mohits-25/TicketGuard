@@ -39,6 +39,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
 
+                .cors(cors -> {})   // Enable CORS
+
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
@@ -47,6 +49,10 @@ public class SecurityConfig {
                         .requestMatchers(
 
                                 "/api/auth/**",
+
+                                "/api/v1/events/**",
+
+                                "/api/v1/venues/**",
 
                                 "/v3/api-docs/**",
 

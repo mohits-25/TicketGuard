@@ -80,7 +80,19 @@ public class AuthenticationService {
         log.info("JWT generated successfully for user: {}",
                 savedUser.getEmail());
 
-        return new LoginResponse(token);
+        return new LoginResponse(
+
+                token,
+
+                savedUser.getFirstName(),
+
+                savedUser.getLastName(),
+
+                savedUser.getEmail(),
+
+                savedUser.getRole()
+
+        );
     }
 
     /**
@@ -100,6 +112,9 @@ public class AuthenticationService {
         log.info("Authentication successful for user: {}",
                 request.email());
 
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow();
+
         UserDetails userDetails =
                 userDetailsService.loadUserByUsername(request.email());
 
@@ -108,6 +123,18 @@ public class AuthenticationService {
         log.info("JWT generated successfully for user: {}",
                 request.email());
 
-        return new LoginResponse(token);
+        return new LoginResponse(
+
+                token,
+
+                user.getFirstName(),
+
+                user.getLastName(),
+
+                user.getEmail(),
+
+                user.getRole()
+
+        );
     }
 }
