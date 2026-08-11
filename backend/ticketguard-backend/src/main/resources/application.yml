@@ -1,29 +1,21 @@
 spring:
-
   application:
     name: ticketguard-backend
 
   datasource:
-    url: jdbc:mysql://localhost:3306/ticketguard
-    username: YOUR_DATABASE_USERNAME
-    password: YOUR_DATABASE_PASSWORD
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/ticketguard
+    username: postgres
+    password: "0000"
 
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
-    open-in-view: false
-
-    properties:
-      hibernate:
-        format_sql: true
 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: YOUR_EMAIL@gmail.com
-    password: YOUR_APP_PASSWORD
+    username: mohitsmohit650@gmail.com
+    password: ipia ulyt eybj dhgj
 
     properties:
       mail:
@@ -32,28 +24,6 @@ spring:
           starttls:
             enable: true
 
-server:
-  port: 8080
-
 jwt:
-  secret: YOUR_256_BIT_SECRET_KEY
+  secret: 3e7dfb0b6d3cb0ef8d7b0b16df6a52fd8a6d82d2ef8f6e55a1b8e7f47c6a1234
   expiration: 86400000
-
-logging:
-  level:
-    root: INFO
-    org.springframework.security: INFO
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-
-app:
-
-  frontend-url: http://localhost:5173
-
-  ticket:
-
-    qr-directory: qrcodes/
-
-    pdf-directory: tickets/
