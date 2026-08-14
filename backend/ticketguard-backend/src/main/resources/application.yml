@@ -5,25 +5,32 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/ticketguard
     username: postgres
-    password: "0000"
+    password: YOUR_POSTGRES_PASSWORD
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
-
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: mohitsmohit650@gmail.com
-    password: ipia ulyt eybj dhgj
-
+    show-sql: false
     properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  cache:
+    type: redis
+
+server:
+  port: 8080
 
 jwt:
-  secret: 3e7dfb0b6d3cb0ef8d7b0b16df6a52fd8a6d82d2ef8f6e55a1b8e7f47c6a1234
+  secret: YOUR_JWT_SECRET
   expiration: 86400000
+
+logging:
+  level:
+    com.ticketguard.ticketguard_backend: INFO

@@ -9,6 +9,10 @@ import com.ticketguard.ticketguard_backend.venue.mapper.VenueMapper;
 import com.ticketguard.ticketguard_backend.venue.repository.VenueRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.CacheEvict;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,6 +75,7 @@ public class VenueService {
     /**
      * Get Venue By ID
      */
+    @Cacheable(value = "venues", key = "#id")
     public VenueResponse getVenueById(Long id) {
 
         log.info("Fetching venue with ID: {}", id);
@@ -92,6 +97,7 @@ public class VenueService {
     /**
      * Update Venue
      */
+    @CachePut(value = "venues", key = "#id")
     public VenueResponse updateVenue(
             Long id,
             VenueRequest request) {
@@ -137,6 +143,7 @@ public class VenueService {
     /**
      * Delete Venue
      */
+    @CacheEvict(value = "venues", key = "#id")
     public void deleteVenue(Long id) {
 
         log.info("Deleting venue with ID: {}", id);

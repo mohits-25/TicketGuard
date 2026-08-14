@@ -10,6 +10,9 @@ import com.ticketguard.ticketguard_backend.event.mapper.EventMapper;
 import com.ticketguard.ticketguard_backend.event.repository.EventRepository;
 import com.ticketguard.ticketguard_backend.venue.entity.Venue;
 import com.ticketguard.ticketguard_backend.venue.repository.VenueRepository;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.CacheEvict;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,6 +99,7 @@ public class EventService {
     /**
      * Get Event By Id
      */
+    @Cacheable(value = "events", key = "#id")
     public EventResponse getEventById(Long id) {
 
         log.info("Fetching event with ID: {}", id);
@@ -117,6 +121,7 @@ public class EventService {
     /**
      * Update Event
      */
+    @CachePut(value = "events", key = "#id")
     public EventResponse updateEvent(
             Long id,
             EventRequest request) {
@@ -165,6 +170,7 @@ public class EventService {
     /**
      * Delete Event
      */
+    @CacheEvict(value = "events", key = "#id")
     public void deleteEvent(Long id) {
 
         log.info("Deleting event with ID: {}", id);
