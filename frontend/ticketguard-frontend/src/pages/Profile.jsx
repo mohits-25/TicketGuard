@@ -1,3 +1,3 @@
-const Profile = () => <div>Profile</div>;
+import Profile from "./dashboard/Profile";
 
 export default Profile;
